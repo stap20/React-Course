@@ -54,18 +54,18 @@ class DishDetail extends Component {
     if (dish != null) {
       const comments_html = dish.comments.map((comment) => {
         return (
-          <div key={comment.id}>
+          <li key={comment.id}>
             <p>{comment.comment}</p>
             <p>
-              -- {comment.author},{convert_date_formate(comment.date)}
+              -- {comment.author} , {convert_date_formate(comment.date)}
             </p>
-          </div>
+          </li>
         );
       });
       return (
         <div className="container col-12 col-md-5 m-1">
           <h4>Comments</h4>
-          <li className = "list-unstyled">{comments_html}</li>
+          <ul className="list-unstyled">{comments_html}</ul>
         </div>
       );
     } else {
