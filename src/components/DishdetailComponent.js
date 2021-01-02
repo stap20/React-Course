@@ -1,33 +1,6 @@
 import React, { Component } from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 
-function convert_date_formate(strdate) {
-  const monthNames = [
-    "January",
-    "Feb",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  const date = new Date(strdate);
-  const year = date.getFullYear();
-  const month = monthNames[date.getMonth()];
-  var day = date.getDate() + 1;
-  if (day < 10) {
-    day = "0" + day;
-  }
-
-  return month + " " + day + ", " + year;
-}
-
 class DishDetail extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +30,12 @@ class DishDetail extends Component {
           <li key={comment.id}>
             <p>{comment.comment}</p>
             <p>
-              -- {comment.author} , {convert_date_formate(comment.date)}
+              -- {comment.author} ,{" "}
+              {new Intl.DateTimeFormat("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "2-digit",
+              }).format(new Date(Date.parse(comment.date)))}
             </p>
           </li>
         );
@@ -74,11 +52,14 @@ class DishDetail extends Component {
   }
 
   render() {
-    const current_dish = this.props.selectedDish;
+    const current_dish = this.props.dish;
+    console.log(current_dish)
     return (
-      <div className="row">
-        {this.renderDish(current_dish)}
-        {this.renderComments(current_dish)}
+      <div className="container">
+        <div className="row">
+          {this.renderDish(current_dish)}
+          {this.renderComments(current_dish)}
+        </div>
       </div>
     );
   }
