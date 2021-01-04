@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
-import { FadeTransform, Fade, Stagger } from "react-animation-components";
+import { Fade, Stagger } from "react-animation-components";
 
 function RenderLeader({ leaders, isLoading, errMess }) {
   if (isLoading) {
@@ -47,10 +47,6 @@ function RenderLeader({ leaders, isLoading, errMess }) {
   }
 }
 function About(props) {
-  const leaders = props.leaders.map((leader) => {
-    return <p>Leader {leader.name}</p>;
-  });
-
   return (
     <div className="container">
       <div className="row">
